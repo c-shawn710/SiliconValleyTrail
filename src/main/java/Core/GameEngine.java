@@ -6,11 +6,13 @@ import Enums.GameSessionResult;
 import Enums.PostGameOption;
 import Model.*;
 import Service.*;
+import UI.ConsoleUI;
 
 import java.util.Scanner;
 
 public class GameEngine {
 
+    private final ConsoleUI ui;
     private final EventResolver eventResolver;
     private final GameRules gameRules;
     private final Route route;
@@ -19,6 +21,7 @@ public class GameEngine {
     private final WeatherService weatherService;
 
     public GameEngine() {
+        this.ui = new ConsoleUI();
         this.eventResolver = new EventResolver();
         this.gameRules = new GameRules();
         this.route = new Route();
@@ -31,7 +34,7 @@ public class GameEngine {
         boolean running = true;
 
         while (running) {
-            printMainMenu();
+            ui.promptMainMenuChoice();
 
             int choice = scanner.nextInt();
 
@@ -59,21 +62,9 @@ public class GameEngine {
         }
     }
 
-    private void printMainMenu() {
-        System.out.println("""
-                ========================================
-                SILICON VALLEY TRAIL - Main Menu
-                ========================================
-                1. New Game
-                2. Load Game
-                3. Delete save file
-                4. Quit
-                """);
-    }
-
     private void startNewGame() {
         GameState state = new GameState();
-        printWelcomeInstructions();
+        ui.printWelcomeInstructions();
         runGameLoop(state);
     }
 
@@ -100,9 +91,9 @@ public class GameEngine {
             Location currentLocation = route.getCurrentLocation(state);
             WeatherEffect currentWeather = weatherService.getWeatherEffect(currentLocation);
 
-            printState(state, currentLocation, currentWeather);
+            ui.printState(state, currentLocation, currentWeather);
 
-            ActionType action = promptPlayerAction();
+            ActionType action = ui.promptPlayerAction();
             GameSessionResult result = handleAction(action, state);
 
             if (result == GameSessionResult.RETURNED_TO_MENU) {
@@ -115,7 +106,7 @@ public class GameEngine {
         if (state.isGameWon()) {
             handleWinFlow();
         } else {
-            printLossMessage();
+            ui.printLossMessage();
         }
     }
 
@@ -125,7 +116,7 @@ public class GameEngine {
             return;
         }
 
-        boolean confirmed = confirmDeleteSave();
+        boolean confirmed = ui.confirmDeleteSave();
 
         if (!confirmed) {
             System.out.println("\nDelete save file cancelled.");
@@ -141,40 +132,6 @@ public class GameEngine {
         }
     }
 
-    private void printState(GameState state, Location currentLocation, WeatherEffect weatherEffect) {
-        System.out.println("========================================");
-        System.out.println("Day " + state.getDay() + " | " + currentLocation);
-        System.out.println("Cash: $" + String.format("%,d", state.getCash()));
-        System.out.println("Morale: " + state.getMorale() + "/" + GameConstants.MAX_MORALE);
-        System.out.println("Coffee: " + state.getCoffee() + "/" + GameConstants.MAX_COFFEE);
-        System.out.println("Bugs: " + state.getBugs() + "/" + GameConstants.MAX_BUGS);
-        System.out.println("Progress: " + getProgressPercent(state) + "% to San Francisco");
-        System.out.println("Weather: " + formatWeatherSummary(weatherEffect) + "°F");
-    }
-
-    private ActionType promptPlayerAction() {
-        System.out.println("\nWhat will you do?");
-        System.out.println("1. Travel to next location");
-        System.out.println("2. Rest and recover (restore morale, use coffee)");
-        System.out.println("3. Work on Product (reduce bugs, use coffee)");
-        System.out.println("4. Save game");
-        System.out.println("5. Quit to menu");
-
-        int choice = scanner.nextInt();
-
-        return switch (choice) {
-            case 1 -> ActionType.TRAVEL;
-            case 2 -> ActionType.REST;
-            case 3 -> ActionType.WORK_ON_PRODUCT;
-            case 4 -> ActionType.SAVE;
-            case 5 -> ActionType.QUIT;
-            default -> {
-                System.out.println("Invalid choice, try again.");
-                yield promptPlayerAction();
-            }
-        };
-    }
-
     private GameSessionResult handleAction(ActionType action, GameState state) {
         switch (action) {
             case TRAVEL:
@@ -182,7 +139,6 @@ public class GameEngine {
 
                 if (!state.isGameOver()) {
                     gameRules.processEndOfDay(state);
-                    state.incrementDay();
                 }
 
                 return GameSessionResult.CONTINUE;
@@ -194,7 +150,6 @@ public class GameEngine {
 
                 if (!state.isGameOver()) {
                     gameRules.processEndOfDay(state);
-                    state.incrementDay();
                 }
 
                 return GameSessionResult.CONTINUE;
@@ -207,7 +162,6 @@ public class GameEngine {
 
                 if (!state.isGameOver()) {
                     gameRules.processEndOfDay(state);
-                    state.incrementDay();
                 }
 
                 return GameSessionResult.CONTINUE;
@@ -246,7 +200,7 @@ public class GameEngine {
 
         WeatherEffect weatherEffect = weatherService.getWeatherEffect(currentLocation);
 
-        System.out.println("Current weather: " + formatWeatherSummary(weatherEffect) + "°F");
+        System.out.println("Current weather: " + ui.formatWeatherSummary(weatherEffect) + "°F");
 
         // Weather effects only
         state.adjustCoffee(weatherEffect.getCoffeeModifier());
@@ -254,7 +208,7 @@ public class GameEngine {
         state.adjustBugs(weatherEffect.getBugModifier());
 
         Event event = eventResolver.resolveEvent(currentLocation, weatherEffect.getType());
-        EventChoice selectedChoice = promptEventChoice(event);
+        EventChoice selectedChoice = ui.promptEventChoice(event);
         applyEventChoice(selectedChoice, state);
 
         System.out.println("\nYou chose: " + selectedChoice.getDescription());
@@ -270,29 +224,6 @@ public class GameEngine {
         }
     }
 
-    private EventChoice promptEventChoice(Event event) {
-        System.out.println("----------------------------------------");
-        System.out.println("Event: " + event.getTitle());
-        System.out.println(event.getDescription());
-        System.out.println("----------------------------------------");
-
-        System.out.println("1. " + event.getChoiceOne().getDescription()
-                + " (" + formatChoiceEffects(event.getChoiceOne()) + ")");
-        System.out.println("2. " + event.getChoiceTwo().getDescription()
-                + " (" + formatChoiceEffects(event.getChoiceTwo()) + ")");
-
-        int choice = scanner.nextInt();
-
-        if (choice == 1) {
-            return event.getChoiceOne();
-        } else if (choice == 2) {
-            return event.getChoiceTwo();
-        } else {
-            System.out.println("Invalid choice, try again.");
-            return promptEventChoice(event);
-        }
-    }
-
     private void applyEventChoice(EventChoice choice, GameState state) {
         state.adjustCash(choice.getCashChange());
         state.adjustMorale(choice.getMoraleChange());
@@ -300,117 +231,10 @@ public class GameEngine {
         state.adjustBugs(choice.getBugsChange());
     }
 
-    private String formatChoiceEffects(EventChoice choice) {
-        StringBuilder effects = new StringBuilder();
-
-        appendEffect(effects, "Cash", choice.getCashChange());
-        appendEffect(effects, "Morale", choice.getMoraleChange());
-        appendEffect(effects, "Coffee", choice.getCoffeeChange());
-        appendEffect(effects, "Bugs", choice.getBugsChange());
-
-        if (effects.isEmpty()) {
-            return "No change";
-        }
-
-        return effects.toString();
-    }
-
-    private void appendEffect(StringBuilder builder, String label, int value) {
-        if (value == 0) {
-            return;
-        }
-
-        if (!builder.isEmpty()) {
-            builder.append(", ");
-        }
-
-        if (value > 0) {
-            builder.append(label).append(" +").append(value);
-        } else {
-            builder.append(label).append(" ").append(value);
-        }
-    }
-
-    private int getProgressPercent(GameState state) {
-        return state.getCurrentLocationIndex() * GameConstants.MAP_PROGRESS_MULTIPLIER;
-    }
-
-    private String formatWeatherSummary(WeatherEffect weatherEffect) {
-        return weatherEffect.getType() + ", " + Math.round(weatherEffect.getTemperatureFahrenheit());
-    }
-
-    private void printWelcomeInstructions() {
-        System.out.println("""
-                ========================================
-                Welcome to Silicon Valley Trail!
-                
-                Your goal is to guide your startup team from
-                San Jose to San Francisco.
-                
-                You win by:
-                - Reaching San Francisco
-                
-                You lose if:
-                - Cash reaches $0
-                - Morale reaches 0/100
-                - Coffee stays 0/50 for 2 consecutive days
-                - Bugs reach 10/10
-                
-                Each day, choose carefully.
-                Traveling triggers special events.
-                """);
-    }
-
-    private PostGameOption promptWinMenu() {
-        System.out.println("""
-                1. New Game
-                2. Back to Main menu
-                3. Quit""");
-
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                return PostGameOption.NEW_GAME;
-
-            case 2:
-                return PostGameOption.MAIN_MENU;
-
-            case 3: return PostGameOption.QUIT;
-
-            default:
-                System.out.println("Invalid choice, try again.");
-                return promptWinMenu();
-        }
-    }
-
-    private boolean confirmDeleteSave() {
-        System.out.println("""
-                Are you sure you want to delete this save file?
-                1. Yes
-                2. No
-                """);
-
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                return true;
-
-            case 2:
-                return false;
-
-            default:
-                System.out.println("Invalid choice, try again.");
-                return confirmDeleteSave();
-        }
-    }
-
     private void handleWinFlow() {
-        System.out.println("Your startup survived the Silicon Valley Trail! You win!");
-        System.out.println("========================================");
+        ui.printWinMessage();
 
-        PostGameOption option = promptWinMenu();
+        PostGameOption option = ui.promptWinMenu();
 
         switch (option) {
             case NEW_GAME:
@@ -425,12 +249,5 @@ public class GameEngine {
                 System.exit(0);
                 break;
         }
-    }
-
-    private void printLossMessage() {
-        System.out.println("""
-                Your startup failed. Game over.
-                Returning to main menu...
-                ========================================""");
     }
 }
