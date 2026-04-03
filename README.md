@@ -1,4 +1,4 @@
-# SiliconValleyTrail
+# Silicon Valley Trail
 
 A console-based resource management game where you guide a startup team from San Jose to San Francisco while balancing cash, morale, coffee, and bugs.
 
@@ -24,7 +24,7 @@ Here is a short demo of the application running:
 
 ### Prerequisites
 - Java 17+  
-- Maven  
+- Maven installed and available on your system PATH
 
 ### Clone the repository
 ```bash
@@ -34,7 +34,7 @@ cd SiliconValleyTrail
 
 ### Run the application
 ```bash
-mvn compile exec:java -Dexec.mainClass="App.Main"
+mvn compile exec:java
 ```
 
 ---
@@ -95,6 +95,7 @@ Open-Meteo was chosen because:
 - Weather data is mapped into gameplay effects (morale, coffee, bugs)
   
 Weather responses are mapped into a `WeatherEffect` model so the rest of the game does not depend directly on the API response format.
+A mock weather mode is not currently implemented.
 
 ---
 
@@ -141,7 +142,7 @@ The goal was to balance simplicity with meaningful decision-making.
 
 ### Error Handling Strategy
 
-- - Input validation is handled in the UI layer 
+- Input validation is handled in the UI layer 
 - API failures fall back to neutral weather  
 - Save/load operations are handled with error checks  
  
