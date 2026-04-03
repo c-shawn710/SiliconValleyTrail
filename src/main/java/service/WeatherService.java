@@ -1,6 +1,5 @@
 package service;
 
-import constants.GameConstants;
 import constants.WeatherConstants;
 import enums.WeatherType;
 import model.Location;
