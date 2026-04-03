@@ -1,5 +1,6 @@
 package service;
 
+import constants.GameConstants;
 import constants.WeatherConstants;
 import enums.WeatherType;
 import model.Location;
@@ -40,7 +41,7 @@ public class WeatherService {
                     HttpResponse.BodyHandlers.ofString()
             );
 
-            if (response.statusCode() != 200) {
+            if (response.statusCode() != WeatherConstants.STATUS_CODE_OK) {
                 return getFallbackWeatherEffect();
             }
 

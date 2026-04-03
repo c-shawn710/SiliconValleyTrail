@@ -7,6 +7,7 @@ public class WeatherConstants {
     // API Config
     public static final String BASE_URL = "https://api.open-meteo.com/v1/forecast";
     public static final String QUERY_TEMPLATE = "%s?latitude=%f&longitude=%f&current=temperature_2m,weather_code";
+    public static final int STATUS_CODE_OK = 200;
 
     // Temperature
     public static final double HEAT_THRESHOLD_F = 85.0;
