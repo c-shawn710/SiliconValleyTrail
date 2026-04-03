@@ -1,9 +1,9 @@
-package Service;
+package service;
 
-import Enums.WeatherType;
-import Model.Event;
-import Model.EventChoice;
-import Model.Location;
+import enums.WeatherType;
+import model.Event;
+import model.EventChoice;
+import model.Location;
 
 
 import java.util.ArrayList;

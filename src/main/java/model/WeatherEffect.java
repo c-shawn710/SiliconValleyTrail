@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Enums.WeatherType;
+import enums.WeatherType;
 
 public class WeatherEffect {
 

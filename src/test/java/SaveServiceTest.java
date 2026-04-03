@@ -1,5 +1,5 @@
-import Model.GameState;
-import Service.SaveService;
+import model.GameState;
+import service.SaveService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

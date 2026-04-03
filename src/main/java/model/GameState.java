@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Constants.GameConstants;
+import constants.GameConstants;
 
 public class GameState {
 

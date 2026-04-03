@@ -1,12 +1,12 @@
-package Service;
+package service;
 
-import Constants.GameConstants;
-import Model.GameState;
+import constants.GameConstants;
+import model.GameState;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.util.List;
-import static Constants.GameConstants.*;
+import static constants.GameConstants.*;
 
 public class SaveService {
 

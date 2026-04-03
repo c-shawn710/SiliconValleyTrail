@@ -1,14 +1,12 @@
-package Core;
+package core;
 
-import Constants.GameConstants;
-import Enums.ActionType;
-import Enums.GameSessionResult;
-import Enums.PostGameOption;
-import Model.*;
-import Service.*;
-import UI.ConsoleUI;
-
-import java.util.Scanner;
+import constants.GameConstants;
+import enums.ActionType;
+import enums.ActionResult;
+import enums.PostGameOption;
+import model.*;
+import service.*;
+import ui.ConsoleUI;
 
 public class GameEngine {
 
@@ -17,7 +15,6 @@ public class GameEngine {
     private final GameRules gameRules;
     private final Route route;
     private final SaveService saveService;
-    private final Scanner scanner;
     private final WeatherService weatherService;
 
     public GameEngine() {
@@ -26,7 +23,6 @@ public class GameEngine {
         this.gameRules = new GameRules();
         this.route = new Route();
         this.saveService = new SaveService();
-        this.scanner = new Scanner(System.in);
         this.weatherService = new WeatherService();
     }
 
@@ -34,9 +30,7 @@ public class GameEngine {
         boolean running = true;
 
         while (running) {
-            ui.promptMainMenuChoice();
-
-            int choice = scanner.nextInt();
+            int choice = ui.promptMainMenuChoice();
 
             switch (choice) {
                 case 1:
@@ -75,15 +69,11 @@ public class GameEngine {
             if (loadedState == null) {
                 System.out.println("\nNo save file found.");
             } else {
-                startLoadedGame(loadedState);
+                runGameLoop(loadedState);
             }
         } catch (Exception e) {
             System.out.println("\nFailed to load game: " + e.getMessage());
         }
-    }
-
-    public void startLoadedGame(GameState state) {
-        runGameLoop(state);
     }
 
     private void runGameLoop(GameState state) {
@@ -94,9 +84,9 @@ public class GameEngine {
             ui.printState(state, currentLocation, currentWeather);
 
             ActionType action = ui.promptPlayerAction();
-            GameSessionResult result = handleAction(action, state);
+            ActionResult result = handleAction(action, state);
 
-            if (result == GameSessionResult.RETURNED_TO_MENU) {
+            if (result == ActionResult.RETURNED_TO_MENU) {
                 return;
             }
 
@@ -132,7 +122,7 @@ public class GameEngine {
         }
     }
 
-    private GameSessionResult handleAction(ActionType action, GameState state) {
+    private ActionResult handleAction(ActionType action, GameState state) {
         switch (action) {
             case TRAVEL:
                 handleTravel(state);
@@ -141,7 +131,7 @@ public class GameEngine {
                     gameRules.processEndOfDay(state);
                 }
 
-                return GameSessionResult.CONTINUE;
+                return ActionResult.CONTINUE;
 
             case REST:
                 state.adjustMorale(GameConstants.REST_MORALE_MOD);
@@ -152,7 +142,7 @@ public class GameEngine {
                     gameRules.processEndOfDay(state);
                 }
 
-                return GameSessionResult.CONTINUE;
+                return ActionResult.CONTINUE;
 
             case WORK_ON_PRODUCT:
                 state.adjustMorale(GameConstants.WORK_ON_PRODUCT_MORALE_MOD);
@@ -164,17 +154,17 @@ public class GameEngine {
                     gameRules.processEndOfDay(state);
                 }
 
-                return GameSessionResult.CONTINUE;
+                return ActionResult.CONTINUE;
 
             case SAVE:
                 handleSave(state);
-                return GameSessionResult.CONTINUE;
+                return ActionResult.CONTINUE;
 
             case QUIT:
-                return GameSessionResult.RETURNED_TO_MENU;
+                return ActionResult.RETURNED_TO_MENU;
 
             default:
-                return GameSessionResult.CONTINUE;
+                return ActionResult.CONTINUE;
         }
     }
 

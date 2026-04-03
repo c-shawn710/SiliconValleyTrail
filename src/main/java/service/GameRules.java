@@ -1,8 +1,8 @@
-package Core;
+package service;
 
-import Constants.GameConstants;
-import Model.GameState;
-import Model.Route;
+import constants.GameConstants;
+import model.GameState;
+import model.Route;
 
 public class GameRules {
 
@@ -28,7 +28,6 @@ public class GameRules {
         }
 
         state.incrementDay();
-
     }
 
     private void checkWinCondition(GameState state, Route route) {

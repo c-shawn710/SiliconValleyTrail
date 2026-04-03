@@ -1,6 +1,6 @@
-import Core.GameRules;
-import Model.GameState;
-import Model.Route;
+import service.GameRules;
+import model.GameState;
+import model.Route;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

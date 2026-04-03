@@ -1,6 +1,6 @@
-package App;
+package app;
 
-import Core.GameEngine;
+import core.GameEngine;
 
 public class Main {
 

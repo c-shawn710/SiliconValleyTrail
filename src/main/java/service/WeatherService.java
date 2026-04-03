@@ -1,9 +1,9 @@
-package Service;
+package service;
 
-import Constants.WeatherConstants;
-import Enums.WeatherType;
-import Model.Location;
-import Model.WeatherEffect;
+import constants.WeatherConstants;
+import enums.WeatherType;
+import model.Location;
+import model.WeatherEffect;
 import org.json.JSONObject;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
-import Model.GameState;
-import Model.Location;
-import Model.Route;
+import model.GameState;
+import model.Location;
+import model.Route;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

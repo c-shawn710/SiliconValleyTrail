@@ -1,9 +1,9 @@
-package UI;
+package ui;
 
-import Constants.GameConstants;
-import Enums.ActionType;
-import Enums.PostGameOption;
-import Model.*;
+import constants.GameConstants;
+import enums.ActionType;
+import enums.PostGameOption;
+import model.*;
 
 import java.util.Scanner;
 
