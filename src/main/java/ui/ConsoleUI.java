@@ -185,13 +185,13 @@ public class ConsoleUI {
         }
 
         if (!builder.isEmpty()) {
-            builder.append(", ");
+            builder.append(" | ");
         }
 
         if (value > 0) {
-            builder.append(label).append(" +").append(value);
+            builder.append(label).append(": +").append(value);
         } else {
-            builder.append(label).append(" ").append(value);
+            builder.append(label).append(": ").append(value);
         }
     }
 }

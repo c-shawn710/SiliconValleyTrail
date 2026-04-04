@@ -126,15 +126,15 @@ public class GameEngine {
         switch (action) {
             case TRAVEL:
                 handleTravel(state);
-                return ActionResult.CONTINUE;
+                break;
 
             case REST:
                 handleRest(state);
-                return ActionResult.CONTINUE;
+                break;
 
             case WORK_ON_PRODUCT:
                 handleWorkOnProduct(state);
-                return ActionResult.CONTINUE;
+                break;
 
             case SAVE:
                 handleSave(state);
@@ -144,8 +144,14 @@ public class GameEngine {
                 return ActionResult.RETURNED_TO_MENU;
 
             default:
-                return ActionResult.CONTINUE;
+                break;
         }
+
+        if (!state.isGameOver()) {
+            gameRules.processEndOfDay(state);
+        }
+
+        return ActionResult.CONTINUE;
     }
 
 
@@ -182,21 +188,12 @@ public class GameEngine {
         applyEventChoice(selectedChoice, state);
 
         System.out.println("\nYou chose: " + selectedChoice.getDescription());
-
-        if (!state.isGameOver()) {
-            gameRules.processEndOfDay(state);
-        }
-
     }
 
     private void handleRest(GameState state) {
         state.adjustMorale(GameConstants.REST_MORALE_MOD);
         state.adjustCoffee(GameConstants.REST_COFFEE_MOD);
         System.out.println("You rest and recover...");
-
-        if (!state.isGameOver()) {
-            gameRules.processEndOfDay(state);
-        }
     }
 
     private void handleWorkOnProduct(GameState state) {
@@ -204,10 +201,6 @@ public class GameEngine {
         state.adjustCoffee(GameConstants.WORK_ON_PRODUCT_COFFEE_MOD);
         state.adjustBugs(GameConstants.WORK_ON_PRODUCT_BUG_MOD);
         System.out.println("Your team focuses on squashing bugs...");
-
-        if (!state.isGameOver()) {
-            gameRules.processEndOfDay(state);
-        }
     }
 
     private void handleSave(GameState state) {
