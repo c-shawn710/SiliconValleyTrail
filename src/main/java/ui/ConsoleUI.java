@@ -31,7 +31,7 @@ public class ConsoleUI {
 
     public void printWelcomeInstructions() {
         System.out.println("""
-                ========================================
+                =============================================
                 Welcome to Silicon Valley Trail!
                 
                 Your goal is to guide your startup team from
@@ -51,7 +51,7 @@ public class ConsoleUI {
     }
 
     public void printState(GameState state, Location currentLocation, WeatherEffect weatherEffect) {
-        System.out.println("========================================");
+        System.out.println("=============================================");
         System.out.println("Day " + state.getDay() + " | " + currentLocation);
         System.out.println("Cash: $" + String.format("%,d", state.getCash()));
         System.out.println("Morale: " + state.getMorale() + "/" + GameConstants.MAX_MORALE);
@@ -82,10 +82,10 @@ public class ConsoleUI {
     }
 
     public EventChoice promptEventChoice(Event event) {
-        System.out.println("----------------------------------------");
+        System.out.println("---------------------------------------------");
         System.out.println("Event: " + event.getTitle());
         System.out.println(event.getDescription());
-        System.out.println("----------------------------------------");
+        System.out.println("---------------------------------------------");
 
         System.out.println("1. " + event.getChoiceOne().getDescription()
                 + " (" + formatChoiceEffects(event.getChoiceOne()) + ")");
@@ -126,14 +126,14 @@ public class ConsoleUI {
 
     public void printWinMessage() {
         System.out.println("Your startup survived the Silicon Valley Trail! You win!");
-        System.out.println("========================================");
+        System.out.println("=============================================");
     }
 
     public void printLossMessage() {
         System.out.println("""
                 Your startup failed. Game over.
                 Returning to main menu...
-                ========================================
+                =============================================
                 """);
     }
 

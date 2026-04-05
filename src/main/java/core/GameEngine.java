@@ -165,7 +165,7 @@ public class GameEngine {
 
         Location currentLocation = route.getCurrentLocation(state);
 
-        System.out.println("\n========================================");
+        System.out.println("\n=============================================");
         System.out.println("You traveled to " + currentLocation.getName() + ".");
 
         if (route.isAtFinalLocation(state)) {
