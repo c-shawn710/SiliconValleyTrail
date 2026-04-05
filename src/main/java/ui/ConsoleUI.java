@@ -53,26 +53,26 @@ public class ConsoleUI {
         System.out.println("""
                 You win by:
                 - Reaching San Francisco
-                
+               
                 You lose if:
                 - Cash reaches $0
                 - Morale reaches 0/100
                 - Coffee stays 0/50 for 2 consecutive days
                 - Bugs reach 10/10
-                
+               
                 --- Travel ---
                 Traveling moves you to the next location and triggers a special event.
-                
+               
                 Weather conditions also affect your team during travel.
-                
+               
                 Depending on the weather, your:
                 - Morale
                 - Coffee
                 - Bugs
                ...may increase or decrease.
-                
+               
                 Press Enter to return to the main menu...
-                """);
+               """);
 
         scanner.nextLine();
     }
