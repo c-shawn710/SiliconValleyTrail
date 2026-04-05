@@ -74,6 +74,7 @@ The project is organized into the following packages:
 1. Start a new game
 <img width="424" height="479" alt="image" src="https://github.com/user-attachments/assets/0c101006-d983-4d48-bb04-c724183036b2" />
 
+
 3. Each day:
    - View current state (resources + location)  
    - Choose an action (travel, rest, work, save, quit)
@@ -82,8 +83,10 @@ The project is organized into the following packages:
    - A location-based event
 <img width="424" height="136" alt="image" src="https://github.com/user-attachments/assets/290e1cbf-e383-431a-b1c5-cf394d8af6ad" />
 
+
 5. Events present choices that modify resources
 <img width="456" height="58" alt="image" src="https://github.com/user-attachments/assets/99c22139-67e2-4495-a099-ad466cf4d538" />
+
 
 7. Game ends when:
    - You reach San Francisco (win), or  
