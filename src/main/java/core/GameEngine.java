@@ -3,6 +3,7 @@ package core;
 import constants.GameConstants;
 import enums.ActionType;
 import enums.ActionResult;
+import enums.MainMenuOptions;
 import enums.PostGameOption;
 import model.*;
 import service.*;
@@ -30,22 +31,26 @@ public class GameEngine {
         boolean running = true;
 
         while (running) {
-            int choice = ui.promptMainMenuChoice();
+            MainMenuOptions choice = ui.promptMainMenuChoice();
 
             switch (choice) {
-                case 1:
+                case NEW_GAME:
                     startNewGame();
                     break;
 
-                case 2:
+                case LOAD_GAME:
                     loadGameFromMenu();
                     break;
 
-                case 3:
+                case READ_RULES:
+                    ui.printGameRules();
+                    break;
+
+                case DELETE_SAVE_FILE:
                     handleDeleteSave();
                     break;
 
-                case 4:
+                case QUIT:
                     running = false;
                     System.out.println("\nGoodbye.");
                     break;

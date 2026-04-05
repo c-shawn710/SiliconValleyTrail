@@ -2,6 +2,7 @@ package ui;
 
 import constants.GameConstants;
 import enums.ActionType;
+import enums.MainMenuOptions;
 import enums.PostGameOption;
 import model.*;
 
@@ -15,18 +16,28 @@ public class ConsoleUI {
         this.scanner = new Scanner(System.in);
     }
 
-    public int promptMainMenuChoice() {
+    public MainMenuOptions promptMainMenuChoice() {
         System.out.println("""
                 ========================================
                 SILICON VALLEY TRAIL - Main Menu
                 ========================================
                 1. New Game
                 2. Load Game
-                3. Delete save file
-                4. Quit
+                3. Read rules
+                4. Delete save file
+                5. Quit
                 """);
 
-        return readIntInRange(1, 4, "Invalid Choice, try again.");
+        int choice = readIntInRange(1, 5, "Invalid Choice, try again.");
+
+        return switch (choice) {
+            case 1 -> MainMenuOptions.NEW_GAME;
+            case 2 -> MainMenuOptions.LOAD_GAME;
+            case 3 -> MainMenuOptions.READ_RULES;
+            case 4 -> MainMenuOptions.DELETE_SAVE_FILE;
+            case 5 -> MainMenuOptions.QUIT;
+            default -> throw new IllegalStateException("Unexpected action choice: " + choice);
+        };
     }
 
     public void printWelcomeInstructions() {
@@ -34,9 +45,12 @@ public class ConsoleUI {
                 =============================================
                 Welcome to Silicon Valley Trail!
                 
-                Your goal is to guide your startup team from
-                San Jose to San Francisco.
-                
+                Guide your startup team from San Jose to San Francisco!
+                """);
+    }
+
+    public void printGameRules() {
+        System.out.println("""
                 You win by:
                 - Reaching San Francisco
                 
@@ -46,8 +60,22 @@ public class ConsoleUI {
                 - Coffee stays 0/50 for 2 consecutive days
                 - Bugs reach 10/10
                 
-                Each day, choose carefully.
-                Traveling triggers special events.""");
+                --- Travel ---
+                Traveling moves you to the next location and triggers a special event.
+                
+                Weather conditions also affect your team during travel.
+                
+                Depending on the weather, your:
+                - Morale
+                - Coffee
+                - Bugs
+                
+                may increase or decrease.
+                
+                Press Enter to return to the main menu...
+                """);
+
+        scanner.nextLine();
     }
 
     public void printState(GameState state, Location currentLocation, WeatherEffect weatherEffect) {
