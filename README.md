@@ -6,8 +6,6 @@ A console-based resource management game where you guide a startup team from San
 
 ## Demo
 
-Here is a short demo of the application running:
-
 [Watch Demo Video](https://www.loom.com/share/b4bd85543c3141a5bf389171a7c8d23a)
 
 ---
@@ -79,7 +77,7 @@ The project is organized into the following packages:
    - View current state (resources + location)  
    - Choose an action (travel, rest, work, save, quit)
 4. Traveling triggers:
-   - Weather effects  
+   - Weather effects that modify morale, coffee, and bugs
    - A location-based event
 <img width="424" height="136" alt="image" src="https://github.com/user-attachments/assets/290e1cbf-e383-431a-b1c5-cf394d8af6ad" />
 
@@ -92,6 +90,14 @@ The project is organized into the following packages:
    - You reach San Francisco (win), or  
    - A losing condition is met (cash, morale, bugs, or coffee exhaustion)
 <img width="297" height="92" alt="image" src="https://github.com/user-attachments/assets/018d0e60-eb83-466a-891d-2e1843224fe5" />
+
+
+---
+
+## Rules Access
+
+A `Read rules` option is available from the main menu, allowing players to review gameplay mechanics without starting a new game.
+<img width="424" height="570" alt="image" src="https://github.com/user-attachments/assets/0c3de26d-1e0b-4211-85f6-54f021440169" />
 
 
 ---
