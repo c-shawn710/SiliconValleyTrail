@@ -6,7 +6,7 @@ A console-based resource management game where you guide a startup team from San
 
 ## Demo
 
-[Watch Demo Video](https://www.loom.com/share/b4bd85543c3141a5bf389171a7c8d23a)
+[Watch Demo Video](https://www.loom.com/share/85e3c8a6710a4f5fbec7650a8e701613)
 
 ---
 

@@ -18,9 +18,9 @@ public class ConsoleUI {
 
     public MainMenuOptions promptMainMenuChoice() {
         System.out.println("""
-                ========================================
+                =============================================
                 SILICON VALLEY TRAIL - Main Menu
-                ========================================
+                =============================================
                 1. New Game
                 2. Load Game
                 3. Read rules
@@ -41,11 +41,12 @@ public class ConsoleUI {
     }
 
     public void printWelcomeInstructions() {
-        System.out.println("""
+        System.out.print("""
                 =============================================
                 Welcome to Silicon Valley Trail!
                 
-                Guide your startup team from San Jose to San Francisco!
+                Guide your startup team from
+                San Jose to San Francisco!
                 """);
     }
 
