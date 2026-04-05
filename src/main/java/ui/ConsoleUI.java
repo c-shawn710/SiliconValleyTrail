@@ -69,8 +69,7 @@ public class ConsoleUI {
                 - Morale
                 - Coffee
                 - Bugs
-                
-                may increase or decrease.
+               ...may increase or decrease.
                 
                 Press Enter to return to the main menu...
                 """);
