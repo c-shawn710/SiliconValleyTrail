@@ -75,12 +75,10 @@ The project is organized into the following packages:
 2. Each day:
    - View current state (resources + location)  
    - Choose an action (travel, rest, work, save, quit)
-   <img width="424" height="726" alt="image" src="https://github.com/user-attachments/assets/56ac1496-1b43-466c-9311-5b2cedd44c07" />
 3. Traveling triggers:
    - Weather effects  
    - A location-based event
 4. Events present choices that modify resources
-   <img width="569" height="708" alt="image" src="https://github.com/user-attachments/assets/6d2f8b6c-2308-4513-96eb-7e5b7ed6a1a9" />
 6. Game ends when:
    - You reach San Francisco (win), or  
    - A losing condition is met (cash, morale, bugs, or coffee exhaustion)  
