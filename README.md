@@ -74,12 +74,12 @@ The project is organized into the following packages:
 1. Start a new game  
 2. Each day:
    - View current state (resources + location)  
-   - Choose an action (travel, rest, work, save, quit)  
+   - Choose an action (travel, rest, work, save, quit)
 3. Traveling triggers:
    - Weather effects  
-   - A location-based event  
-4. Events present choices that modify resources  
-5. Game ends when:
+   - A location-based event
+4. Events present choices that modify resources
+6. Game ends when:
    - You reach San Francisco (win), or  
    - A losing condition is met (cash, morale, bugs, or coffee exhaustion)  
 
