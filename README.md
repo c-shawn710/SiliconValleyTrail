@@ -97,7 +97,7 @@ The project is organized into the following packages:
 ## Rules Access
 
 A `Read rules` option is available from the main menu, allowing players to review gameplay mechanics without starting a new game.
-<img width="424" height="570" alt="image" src="https://github.com/user-attachments/assets/0c3de26d-1e0b-4211-85f6-54f021440169" />
+<img width="456" height="570" alt="image" src="https://github.com/user-attachments/assets/0c3de26d-1e0b-4211-85f6-54f021440169" />
 
 
 ---
