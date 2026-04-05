@@ -71,12 +71,15 @@ The project is organized into the following packages:
 
 1. Start a new game
    
-<img width="424" height="479" alt="image" src="https://github.com/user-attachments/assets/0c101006-d983-4d48-bb04-c724183036b2" />
+<img width="420" height="214" alt="image" src="https://github.com/user-attachments/assets/d9d7d843-773c-40b6-a02b-b26fed15e168" />
 
 3. Each day:
    - View current state (resources + location)  
    - Choose an action (travel, rest, work, save, quit)
-4. Traveling triggers:
+
+<img width="450" height="383" alt="image" src="https://github.com/user-attachments/assets/62c2460e-a6b2-4c45-95c2-9db4a30e5840" />
+
+5. Traveling triggers:
    - Weather effects that modify morale, coffee, and bugs
    - A location-based event
      
