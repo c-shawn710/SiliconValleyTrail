@@ -97,7 +97,7 @@ public class EventResolver {
         return new Event(
                 "Garage Sale Update",
                 "Your team spots discounted office gear and secondhand hardware.",
-                EventChoice.builder("Buy discounted gear") // new EventChoice("Choice1", -3000, 4, 1
+                EventChoice.builder("Buy discounted gear")
                         .cash(-5000)
                         .morale(0)
                         .coffee(0)
