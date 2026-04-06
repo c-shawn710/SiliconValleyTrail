@@ -39,6 +39,6 @@ public class Event {
     }
 
     public boolean isWeatherEligible(WeatherType currentWeatherType) {
-        return requiredWeatherType == null || requiredWeatherType == currentWeatherType;
+        return requiredWeatherType == currentWeatherType;
     }
 }

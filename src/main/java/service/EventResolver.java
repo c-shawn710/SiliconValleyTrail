@@ -27,53 +27,55 @@ public class EventResolver {
             case "San Jose":
                 validEvents.add(createGarageSaleUpdate());
                 validEvents.add(createLocalNetworkingNight());
-                addIfEligible(validEvents, createFounderMeetUp(), weatherType);
+                addIfWeatherMatches(validEvents, createFounderMeetUp(), weatherType);
                 break;
 
             case "Santa Clara":
                 validEvents.add(createVCPitchOpportunity());
                 validEvents.add(createOfficeSupplyRun());
-                addIfEligible(validEvents, createCommuteChaos(), weatherType);
+                addIfWeatherMatches(validEvents, createCommuteChaos(), weatherType);
                 break;
 
             case "Sunnyvale":
                 validEvents.add(createCloudCreditsOffer());
                 validEvents.add(createTeamBrainstormSession());
-                addIfEligible(validEvents, createHeatwaveBurnout(), weatherType);
+                addIfWeatherMatches(validEvents, createHeatwaveBurnout(), weatherType);
                 break;
 
             case "Mountain View":
                 validEvents.add(createProductionOutage());
                 validEvents.add(createMentorSession());
-                addIfEligible(validEvents, createDemoSetupConfusion(), weatherType);
+                addIfWeatherMatches(validEvents, createDemoSetupConfusion(), weatherType);
                 break;
 
             case "Palo Alto":
                 validEvents.add(createInvestorCoffeeChat());
                 validEvents.add(createFounderPanelTalk());
+                addIfWeatherMatches(validEvents, createCriticalBug(), weatherType);
                 break;
 
             case "Menlo Park":
                 validEvents.add(createCustomerFeedbackSession());
                 validEvents.add(createMiniProductLaunch());
-                addIfEligible(validEvents, createTeamSyncMeeting(), weatherType);
+                addIfWeatherMatches(validEvents, createTeamSyncMeeting(), weatherType);
                 break;
 
             case "Redwood City":
                 validEvents.add(createEnterprisePilotDeal());
                 validEvents.add(createLogisticsShortcut());
+                addIfWeatherMatches(validEvents, createTeamDinner(), weatherType);
                 break;
 
             case "San Bruno":
                 validEvents.add(createApiRateLimitIncident());
                 validEvents.add(createPreDemoPrep());
-                addIfEligible(validEvents, createRainyRemoteDay(), weatherType);
+                addIfWeatherMatches(validEvents, createRainyRemoteDay(), weatherType);
                 break;
 
             case "Daly City":
                 validEvents.add(createRecruitmentPitch());
                 validEvents.add(createPreDemoPrep());
-                addIfEligible(validEvents, createWindyDemoPrep(), weatherType);
+                addIfWeatherMatches(validEvents, createWindyDemoPrep(), weatherType);
                 break;
 
             default:
@@ -85,7 +87,7 @@ public class EventResolver {
         return validEvents.get(random.nextInt(validEvents.size()));
     }
 
-    private void addIfEligible(List<Event> validEvents, Event event, WeatherType weatherType) {
+    private void addIfWeatherMatches(List<Event> validEvents, Event event, WeatherType weatherType) {
         if (event.isWeatherEligible(weatherType)) {
             validEvents.add(event);
         }
@@ -219,6 +221,46 @@ public class EventResolver {
                         .coffee(0)
                         .bugs(-1)
                         .build()
+        );
+    }
+
+    private Event createCriticalBug() {
+        return new Event(
+                "Critical Bug Detected",
+                "A critical big has been discovered and requires everyone to troubleshoot.",
+                EventChoice.builder("Debug")
+                        .cash(0)
+                        .morale(-5)
+                        .coffee(-5)
+                        .bugs(-2)
+                        .build(),
+                EventChoice.builder("Delay")
+                        .cash(0)
+                        .morale(2)
+                        .coffee(-2)
+                        .bugs(2)
+                        .build(),
+                WeatherType.FOG
+        );
+    }
+
+    private Event createTeamDinner() {
+        return new Event(
+                "Team Dinner",
+                "The team wants to go out for dinner.",
+                EventChoice.builder("Go out")
+                        .cash(-10000)
+                        .morale(5)
+                        .coffee(0)
+                        .bugs(1)
+                        .build(),
+                EventChoice.builder("Skip")
+                        .cash(0)
+                        .morale(-10)
+                        .coffee(-5)
+                        .bugs(-1)
+                        .build(),
+                WeatherType.CLEAR
         );
     }
 
