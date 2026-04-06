@@ -38,10 +38,6 @@ public class Event {
         return choiceTwo;
     }
 
-    public WeatherType getRequiredWeatherType() {
-        return requiredWeatherType;
-    }
-
     public boolean isWeatherEligible(WeatherType currentWeatherType) {
         return requiredWeatherType == null || requiredWeatherType == currentWeatherType;
     }
