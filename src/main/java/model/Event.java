@@ -38,7 +38,7 @@ public class Event {
         return choiceTwo;
     }
 
-    public boolean isWeatherEligible(WeatherType currentWeatherType) {
+    public boolean isWeatherMatch(WeatherType currentWeatherType) {
         return requiredWeatherType == currentWeatherType;
     }
 }

@@ -88,7 +88,7 @@ public class EventResolver {
     }
 
     private void addIfWeatherMatches(List<Event> validEvents, Event event, WeatherType weatherType) {
-        if (event.isWeatherEligible(weatherType)) {
+        if (event.isWeatherMatch(weatherType)) {
             validEvents.add(event);
         }
     }
