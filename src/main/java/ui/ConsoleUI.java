@@ -115,9 +115,9 @@ public class ConsoleUI {
         System.out.println(event.getDescription());
         System.out.println("---------------------------------------------");
 
-        System.out.println("1. " + event.getChoiceOne().getDescription()
+        System.out.println("1. " + event.getChoiceOne().getChoice()
                 + " (" + formatChoiceEffects(event.getChoiceOne()) + ")");
-        System.out.println("2. " + event.getChoiceTwo().getDescription()
+        System.out.println("2. " + event.getChoiceTwo().getChoice()
                 + " (" + formatChoiceEffects(event.getChoiceTwo()) + ")");
 
         int choice = readIntInRange(1, 2, "Invalid choice, try again.");

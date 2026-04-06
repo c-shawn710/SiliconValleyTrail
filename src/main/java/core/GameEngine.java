@@ -192,7 +192,7 @@ public class GameEngine {
         EventChoice selectedChoice = ui.promptEventChoice(event);
         applyEventChoice(selectedChoice, state);
 
-        System.out.println("\nYou chose: " + selectedChoice.getDescription());
+        System.out.println("\nYou chose: " + selectedChoice.getChoice());
     }
 
     private void handleRest(GameState state) {

@@ -2,22 +2,22 @@ package model;
 
 public class EventChoice {
 
-    private final String description;
+    private final String choice;
     private final int cashChange;
     private final int moraleChange;
     private final int coffeeChange;
     private final int bugsChange;
 
     public EventChoice(Builder builder) {
-        this.description = builder.description;
+        this.choice = builder.description;
         this.cashChange = builder.cashChange;
         this.moraleChange = builder.moraleChange;
         this.coffeeChange = builder.coffeeChange;
         this.bugsChange = builder.bugsChange;
     }
 
-    public String getDescription() {
-        return description;
+    public String getChoice() {
+        return choice;
     }
 
     public int getCashChange() {
