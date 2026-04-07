@@ -48,4 +48,11 @@ public class GameConstants {
 
     // Number of stats to display
     public static final int NUMBER_OF_STATS = 7;
+
+    // Convert stats to score
+    public static final int CASH_SCORE = 15;
+    public static final int MORALE_SCORE = 10;
+    public static final int COFFEE_SCORE = 5;
+    public static final int BUGS_SCORE = -5;
+    public static final int DAY_SCORE = -2;
 }

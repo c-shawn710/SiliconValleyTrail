@@ -1,5 +1,6 @@
 package service;
 
+import constants.GameConstants;
 import model.GameState;
 
 public class ScoreCalculator {
@@ -11,10 +12,11 @@ public class ScoreCalculator {
 
     public int calculateScore() {
         int score = 0;
-        score += state.getCash() /10 ;
-        score += state.getMorale() * 10;
-        score -= (state.getBugs() * 5);
-        score -= state.getDay() * 5;
+        score += state.getCash() / GameConstants.CASH_SCORE;
+        score += state.getMorale() * GameConstants.MORALE_SCORE;
+        score += state.getCoffee() * GameConstants.COFFEE_SCORE;
+        score += state.getBugs() * GameConstants.BUGS_SCORE;
+        score += state.getDay() * GameConstants.DAY_SCORE;
         return Math.max(0, score);
     }
 }
