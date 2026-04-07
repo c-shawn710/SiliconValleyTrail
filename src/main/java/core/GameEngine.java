@@ -8,6 +8,7 @@ import enums.PostGameOption;
 import model.*;
 import service.*;
 import ui.ConsoleUI;
+import java.io.IOException;
 
 public class GameEngine {
 
@@ -99,7 +100,7 @@ public class GameEngine {
         }
 
         if (state.isGameWon()) {
-            handleWinFlow();
+            handleWinFlow(state);
         } else {
             ui.printLossMessage();
         }
@@ -212,7 +213,7 @@ public class GameEngine {
         try {
             saveService.saveGame(state);
             System.out.println("\nGame saved successfully.");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("\nFailed to save game: " + e.getMessage());
         }
     }
@@ -224,8 +225,11 @@ public class GameEngine {
         state.adjustBugs(choice.getBugsChange());
     }
 
-    private void handleWinFlow() {
-        ui.printWinMessage();
+    private void handleWinFlow(GameState state) {
+        ScoreCalculator scoreCalculator = new ScoreCalculator(state);
+        int finalScore = scoreCalculator.calculateScore();
+
+        ui.printWinMessage(finalScore);
 
         PostGameOption option = ui.promptWinMenu();
 
@@ -235,12 +239,11 @@ public class GameEngine {
                 break;
 
             case MAIN_MENU:
-                break;
+                return;
 
             case QUIT:
                 System.out.println("Goodbye.");
-                System.exit(0);
-                break;
         }
+
     }
 }

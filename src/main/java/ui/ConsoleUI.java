@@ -152,8 +152,9 @@ public class ConsoleUI {
         };
     }
 
-    public void printWinMessage() {
+    public void printWinMessage(int finalScore) {
         System.out.println("Your startup survived the Silicon Valley Trail! You win!");
+        System.out.println("Final score: " + finalScore);
         System.out.println("=============================================");
     }
 

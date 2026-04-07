@@ -78,8 +78,8 @@ public class WeatherService {
             return WeatherType.FOG;
         }
 
-        if (weatherCode >= WeatherConstants.RAIN_CODE_MIN_1 && weatherCode <= WeatherConstants.RAIN_CODE_MAX_1 ||
-            weatherCode >= WeatherConstants.RAIN_CODE_MIN_2 && weatherCode <= WeatherConstants.RAIN_CODE_MAX_2) {
+        if ((weatherCode >= WeatherConstants.RAIN_CODE_MIN_1 && weatherCode <= WeatherConstants.RAIN_CODE_MAX_1) ||
+                (weatherCode >= WeatherConstants.RAIN_CODE_MIN_2 && weatherCode <= WeatherConstants.RAIN_CODE_MAX_2)) {
             return WeatherType.RAIN;
         }
 
